@@ -1,0 +1,30 @@
+const Quiz = require('../models/Quiz')
+const asyncHandler = require('express-async-handler')
+
+const createQuiz = asyncHandler( async(req,res)=>{
+    //return res.status(201).json(req.body)
+
+    const{question,options,rightAnswer,startDate,endDate} = req.body
+    if(!question || !options || !startDate || !endDate  ){
+        return res.status(400).json({message:'All fields are required'})
+    }
+    if(rightAnswer < 0){
+        return res.status(400).json({message:'All fields are required'})
+    }
+    const sd = new Date(startDate)
+    const ed = new Date(endDate)
+    ed.setTime(ed.getTime() + (5 * 60 * 1000));
+
+    const quizObject = {question,options,rightAnswer,"startDate":sd,"endDate":ed}
+
+    const Quizzes = await Quiz.create(quizObject)
+
+    if(Quizzes){
+        res.status(201).json({message:"Quiz created"})
+    }else{
+        res.status(400).json({message:"Invlaid information"})
+    }
+})
+
+
+module.exports = createQuiz
