@@ -6,10 +6,10 @@ const resQuiz = require('../controllers/resultController')
 const router = express.Router()
 
 router.route('/quizzes')
-    .post(createQuiz)
+    .post(createQuiz) //endpoint to create quiz
 
-router.get('/quizzes/all',allQuiz)
-router.get('/quizzes/active',activeQuiz)
-router.get('/quizzes/:id/result',resQuiz)
+router.get('/quizzes/all',allQuiz) //endpoint to get all the quiz question
+router.get('/quizzes/active',activeQuiz) //endpoint to get all the active quiz
+router.get('/quizzes/:id/result',resQuiz) //endpoint to get result by id params
 
 module.exports = router;

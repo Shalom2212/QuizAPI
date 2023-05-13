@@ -10,6 +10,7 @@ const allQuiz = asyncHandler(async(req,res)=>{
 
     const totalquiz = quiz;
 
+    //logic to add current status field to the json object
     const squiz = totalquiz.map(item=>{
         const now = new Date()
         const start = new Date(item.startDate);

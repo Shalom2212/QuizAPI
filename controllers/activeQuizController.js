@@ -17,7 +17,7 @@ const activeQuiz = asyncHandler(async(req,res)=>{
     }
 
     const totalquiz = activequiz;
-
+    //logic to add status 
     const squiz = totalquiz.map(item=>{
       return {
           ...item,

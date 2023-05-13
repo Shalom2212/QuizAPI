@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000
 //GET/quizzes/active
 //GET/quizzes/:id/result
 //GET/quizzes/all
-connectDB()
+connectDB() //to connect to database
 
 app.use(express.json())
 
@@ -27,10 +27,12 @@ app.use(root)
 
 app.use(quizzes)
 
+//404 if non of the endpoints are found
 app.all('*',(req,res)=>{
     res.status(404).send("404 NOT FOUND")
 })
 
+//connection to database
 mongoose.connection.once('open',()=>{
     console.log('Connected to MongoDB')
     app.listen(PORT,()=>{
@@ -38,6 +40,7 @@ mongoose.connection.once('open',()=>{
     })    
 })
 
+//error if mongodb not connected
 mongoose.connection.on('eroor',err => {
     console.log(err)
     logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,'mongoErrLog.log')
